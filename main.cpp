@@ -121,9 +121,9 @@ int main() {
 
 	while (!glfwWindowShouldClose(window)) {
 		++fpsCounter;
-		time = glfwGetTime() * 64;
+		time = glfwGetTime();
 
-		opacity = (sin(time) + 1) / 2;
+		opacity = (sin(time * 8) + 1) / 2;
 		//cout << "\nOpacity: " << opacity;
 
 		processInput(window);
@@ -132,6 +132,7 @@ int main() {
 
 		glUseProgram(shaderProgram);
 		glUniform1f(opacityUniform, opacity);
+		glUniform1f(timeUniform, time);
 
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, 0);
@@ -139,7 +140,6 @@ int main() {
 		if ((uint32_t)time > prevFrameTime) {
 			cout << "\nFPS: " << (int)fpsCounter;
 			fpsCounter = 0;
-			glUniform1f(timeUniform, time);
 			++prevFrameTime;
 		}
 
