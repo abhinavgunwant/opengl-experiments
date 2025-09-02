@@ -13,7 +13,8 @@ void main() {
    float x = aPos.x * cosTheta - aPos.y * sinTheta;
    float y = aPos.x * sinTheta + aPos.y * cosTheta;
 
-   gl_Position = vec4(x, y, 0, 1.0);
+   // gl_Position = vec4(x, y, 0, 1.0);
+   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
    sharedColor = aColor;
 }
 

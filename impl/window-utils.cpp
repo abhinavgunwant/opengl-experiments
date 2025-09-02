@@ -3,6 +3,9 @@
 
 #include "../headers/window-utils.hpp"
 
+#define WIDTH 800
+#define HEIGHT 800
+
 using namespace std;
 
 GLFWwindow* createWindow() {
@@ -11,7 +14,7 @@ GLFWwindow* createWindow() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(640, 480, "OpenGL Experiments", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "OpenGL Experiments", NULL, NULL);
 
 	if (window == NULL) {
 		cout << "\nFailed to create GLFW window";
@@ -33,8 +36,14 @@ void init(GLFWwindow* window) {
 		cout << "\nFailed to initialize GLAD";
 	}
 
-	glViewport(0, 0, 640, 480);
+	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	glClearColor(0, 0, 0, 1.0);
+}
+
+void processInput(GLFWwindow* window) {
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+		glfwSetWindowShouldClose(window, true);
+	}
 }

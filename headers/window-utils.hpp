@@ -7,7 +7,7 @@
 GLFWwindow* createWindow();
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
 void init(GLFWwindow* window);
+void processInput(GLFWwindow* window);
 
 #endif // OPENGL_EXPERIMENTS_WINDOW_UTILS

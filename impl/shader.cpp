@@ -7,7 +7,13 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+Shader::Shader() {}
+
 Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath) {
+	init(vertexShaderPath, fragmentShaderPath);
+}
+
+void Shader::init(const char* vertexShaderPath, const char* fragmentShaderPath) {
 	string vertexShaderCode;
 	string fragmentShaderCode;
 
@@ -105,6 +111,12 @@ int Shader::getVariableIndex(const char* var) {
 	return glGetUniformLocation(programID, var);
 }
 
+void Shader::setBool(int id, bool b) {
+	if (id > 0) {
+		glUniform1i(id, (int) b);
+	}
+}
+
 void Shader::setInt(int id, int a) {
 	if (id > 0) {
 		glUniform1i(id, a);
@@ -112,7 +124,9 @@ void Shader::setInt(int id, int a) {
 }
 
 void Shader::setFloat(int id, float f) {
-	if (id > 0) {
+	if (id >= 0) {
 		glUniform1f(id, f);
+	} else {
+		//cout << "\n!!!!" << id;
 	}
 }

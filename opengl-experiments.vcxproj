@@ -71,20 +71,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;C:\Program Files\DevTools\freetype\include;C:\Program Files\DevTools\cpp-includes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;C:\Program Files\DevTools\freetype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;C:\Program Files\DevTools\freetype\include;C:\Program Files\DevTools\cpp-includes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;C:\Program Files\DevTools\freetype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;C:\Program Files\DevTools\freetype\include;C:\Program Files\DevTools\cpp-includes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;C:\Program Files\DevTools\freetype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\DevTools\glfw-3.4\include;C:\Program Files\DevTools\freetype\include;C:\Program Files\DevTools\cpp-includes;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files\DevTools\glfw-3.4\lib-vc2022;C:\Program Files\DevTools\freetype\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,7 +96,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -113,7 +113,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,7 +126,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,17 +143,25 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="chapters\1-hello_triangle.cpp" />
+    <ClCompile Include="chapters\misc-art.cpp" />
+    <ClCompile Include="chapters\misc-text-rendering.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="impl\shader.cpp" />
+    <ClCompile Include="impl\text.cpp" />
     <ClCompile Include="impl\window-utils.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="chapters\1-hello_triangle.hpp" />
+    <ClInclude Include="chapters\misc-art.hpp" />
+    <ClInclude Include="chapters\misc-text-rendering.hpp" />
     <ClInclude Include="headers\shader.hpp" />
+    <ClInclude Include="headers\text.hpp" />
     <ClInclude Include="headers\window-utils.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
