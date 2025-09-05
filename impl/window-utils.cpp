@@ -3,9 +3,6 @@
 
 #include "../headers/window-utils.hpp"
 
-#define WIDTH 800
-#define HEIGHT 800
-
 using namespace std;
 
 GLFWwindow* createWindow() {
@@ -29,7 +26,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-void init(GLFWwindow* window) {
+void init(GLFWwindow* window, GLFWframebuffersizefun resize_callback) {
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -37,7 +34,12 @@ void init(GLFWwindow* window) {
 	}
 
 	glViewport(0, 0, WIDTH, HEIGHT);
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	if (resize_callback == NULL) {
+		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	} else {
+		glfwSetFramebufferSizeCallback(window, resize_callback);
+	}
 
 	glClearColor(0, 0, 0, 1.0);
 }

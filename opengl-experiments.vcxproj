@@ -148,21 +148,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chapters\1-hello_triangle.cpp" />
+    <ClCompile Include="chapters\2-textures.cpp" />
+    <ClCompile Include="chapters\3-transformations.cpp" />
     <ClCompile Include="chapters\misc-art.cpp" />
     <ClCompile Include="chapters\misc-text-rendering.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="impl\shader.cpp" />
     <ClCompile Include="impl\text.cpp" />
     <ClCompile Include="impl\window-utils.cpp" />
+    <ClCompile Include="lib\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chapters\1-hello_triangle.hpp" />
+    <ClInclude Include="chapters\2-textures.hpp" />
+    <ClInclude Include="chapters\3-transformations.hpp" />
     <ClInclude Include="chapters\misc-art.hpp" />
     <ClInclude Include="chapters\misc-text-rendering.hpp" />
     <ClInclude Include="headers\shader.hpp" />
     <ClInclude Include="headers\text.hpp" />
     <ClInclude Include="headers\window-utils.hpp" />
+    <ClInclude Include="lib\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
