@@ -90,9 +90,6 @@ void chapter1() {
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, 0);
 
-		drawText("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 15, 15, 1, glm::vec3(1, 0, 0));
-		drawText("Test", 50, 50, 1, glm::vec3(1, 0, 0));
-
 		if ((uint32_t)time > prevFrameTime) {
 			cout << "\nFPS: " << (int)fpsCounter;
 			fpsCounter = 0;
