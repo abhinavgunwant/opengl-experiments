@@ -30,7 +30,7 @@ void init(GLFWwindow* window, GLFWframebuffersizefun resize_callback) {
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		cout << "\nFailed to initialize GLAD";
+		cerr << "\nFailed to initialize GLAD";
 	}
 
 	glViewport(0, 0, WIDTH, HEIGHT);
