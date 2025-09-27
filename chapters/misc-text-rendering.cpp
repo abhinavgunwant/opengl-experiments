@@ -1,4 +1,4 @@
-#include "misc-art.hpp"
+﻿#include "misc-art.hpp"
 
 #include <iostream>
 #include <cmath>
@@ -30,6 +30,7 @@ void text_rendering() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		renderText("Abhinav's text rendering attempt", 10, 750, glm::fvec3(1.0, 0, 0));
+		renderText(L"अभिनव गुणवन्त", 10, 600, glm::fvec3(1.0, 0, 0));
 		renderText("In", 10, 700, glm::fvec3(0, 1.0, 0));
 		renderText("OpenGL", 10, 650, glm::fvec3(0, 0, 1.0));
 		renderText("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 15.0f, 15.0f);

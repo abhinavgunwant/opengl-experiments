@@ -11,6 +11,8 @@
 
 #include "shader.hpp"
 
+#define MAX_CHARACTERS 65536
+
 /// Holds all state information relevant to a character as loaded using FreeType
 struct Character {
 	glm::ivec2   size;      // Size of glyph
@@ -19,13 +21,14 @@ struct Character {
 	unsigned int advance;   // Horizontal offset to advance to next glyph
 };
 
-extern Character Characters[128];
+extern Character characters[MAX_CHARACTERS];
 extern Shader textShader;
 extern unsigned int VAO, VBO;
 
-void initCharGlyph(FT_Face& face, unsigned char c);
+void initCharGlyph(FT_Face& face, uint16_t c);
 void initFonts();
 void initTextRendering();
 void renderText(string text, float x, float y, glm::fvec3 color = glm::fvec3(1.0, 1.0, 1.0));
+void renderText(wstring text, float x, float y, glm::fvec3 color = glm::fvec3(1.0, 1.0, 1.0));
 
 #endif // OPENGL_EXPERIMENT_TEXT

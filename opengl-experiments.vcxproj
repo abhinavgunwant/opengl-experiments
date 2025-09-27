@@ -150,6 +150,7 @@
     <ClCompile Include="chapters\1-hello_triangle.cpp" />
     <ClCompile Include="chapters\2-textures.cpp" />
     <ClCompile Include="chapters\3-transformations.cpp" />
+    <ClCompile Include="chapters\4-coordinate-systems.cpp" />
     <ClCompile Include="chapters\misc-art.cpp" />
     <ClCompile Include="chapters\misc-text-rendering.cpp" />
     <ClCompile Include="glad.c" />
@@ -163,6 +164,7 @@
     <ClInclude Include="chapters\1-hello_triangle.hpp" />
     <ClInclude Include="chapters\2-textures.hpp" />
     <ClInclude Include="chapters\3-transformations.hpp" />
+    <ClInclude Include="chapters\4-coordinate-systems.hpp" />
     <ClInclude Include="chapters\misc-art.hpp" />
     <ClInclude Include="chapters\misc-text-rendering.hpp" />
     <ClInclude Include="headers\shader.hpp" />

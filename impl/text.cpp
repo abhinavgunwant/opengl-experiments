@@ -12,18 +12,16 @@
 
 using namespace std;
 
-Character Characters[128];
+Character characters[MAX_CHARACTERS];
 Shader textShader;
 unsigned int VAO, VBO;
 
-void initCharGlyph(FT_Face& face, unsigned char c) {
-	// Load character glyph 
+void initCharGlyph(FT_Face& face, uint16_t c) {
 	if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
 		std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
 		return;
 	}
 
-	// generate texture
 	unsigned int texture;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -38,20 +36,18 @@ void initCharGlyph(FT_Face& face, unsigned char c) {
 		GL_UNSIGNED_BYTE,
 		face->glyph->bitmap.buffer
 	);
-	// set texture options
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	// now store character for later use
-	Character character = {
+	
+	characters[c] = {
 		glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
 		glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
 		texture,
 		static_cast<unsigned int>(face->glyph->advance.x)
 	};
-	// Characters.insert(std::pair<char, Character>(c, character));
-	Characters[(int)c] = character;
 }
 
 void initFonts() {
@@ -64,10 +60,14 @@ void initFonts() {
 
 	// load font as face
 	FT_Face face;
-	if (FT_New_Face(ft, "assets/fonts/inter/Inter-Regular.ttf", 0, &face)) {
+
+	// if (FT_New_Face(ft, "assets/fonts/inter/Inter-Regular.ttf", 0, &face)) {
+	if (FT_New_Face(ft, "assets/fonts/poppins/Poppins-Regular.ttf", 0, &face)) {
 		std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 		return;
 	}
+
+	FT_Select_Charmap(face, FT_ENCODING_UNICODE);
 
 	// set size to load glyphs as
 	FT_Set_Pixel_Sizes(face, 0, 48);
@@ -75,8 +75,18 @@ void initFonts() {
 	// disable byte-alignment restriction
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	for (unsigned char c = 0; c < 128; c++) {
-		initCharGlyph(face, c);
+	cout << "\nTotal characters: " << face->num_glyphs;
+
+	uint32_t charcode;
+	uint32_t id;
+
+	charcode = FT_Get_First_Char(face, &id);
+
+	// for (uint16_t i = 1; i < face->num_glyphs; i++) {
+	while (id != 0) {
+		cout << "\n" << charcode;
+		initCharGlyph(face, charcode);
+		charcode = FT_Get_Next_Char(face, charcode, &id);
 	}
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -114,7 +124,52 @@ void renderText(string text, float x, float y, glm::fvec3 color) {
 
 	// iterate through all characters
 	for (const char c : text) {
-		Character ch = Characters[(int)c];
+		Character ch = characters[(int)c];
+
+		float xpos = x + ch.bearing.x;
+		float ypos = y - (ch.size.y - ch.bearing.y);
+
+		float w = ch.size.x;
+		float h = ch.size.y;
+		// update VBO for each character
+		float vertices[6][4] = {
+			{ xpos,     ypos + h,   0.0f, 0.0f },
+			{ xpos,     ypos,       0.0f, 1.0f },
+			{ xpos + w, ypos,       1.0f, 1.0f },
+			{ xpos,     ypos + h,   0.0f, 0.0f },
+			{ xpos + w, ypos,       1.0f, 1.0f },
+			{ xpos + w, ypos + h,   1.0f, 0.0f }
+		};
+		// render glyph texture over quad
+		glBindTexture(GL_TEXTURE_2D, ch.textureID);
+		// update content of VBO memory
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // be sure to use glBufferSubData and not glBufferData
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		// render quad
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		// now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+		x += (ch.advance >> 6); // bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+	}
+
+	glBindVertexArray(0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+// render line of text
+void renderText(wstring text, float x, float y, glm::fvec3 color) {
+	textShader.use();
+
+	glUniform3f(glGetUniformLocation(textShader.programID, "textColor"), color.r, color.g, color.b);
+	glActiveTexture(GL_TEXTURE0);
+	glBindVertexArray(VAO);
+
+	// iterate through all characters
+	for (const wchar_t c : text) {
+		Character ch = characters[(int)c];
+
+		// cout << "\nRendering " << c << " (" << (int)c << ")";
 
 		float xpos = x + ch.bearing.x;
 		float ypos = y - (ch.size.y - ch.bearing.y);
