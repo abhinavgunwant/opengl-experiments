@@ -151,12 +151,14 @@
     <ClCompile Include="chapters\2-textures.cpp" />
     <ClCompile Include="chapters\3-transformations.cpp" />
     <ClCompile Include="chapters\4-coordinate-systems.cpp" />
+    <ClCompile Include="chapters\5-camera.cpp" />
     <ClCompile Include="chapters\misc-art.cpp" />
     <ClCompile Include="chapters\misc-text-rendering.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="impl\shader.cpp" />
     <ClCompile Include="impl\text.cpp" />
     <ClCompile Include="impl\window-utils.cpp" />
+    <ClCompile Include="impl\camera.cpp" />
     <ClCompile Include="lib\stb_image.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -165,11 +167,13 @@
     <ClInclude Include="chapters\2-textures.hpp" />
     <ClInclude Include="chapters\3-transformations.hpp" />
     <ClInclude Include="chapters\4-coordinate-systems.hpp" />
+    <ClInclude Include="chapters\5-camera.hpp" />
     <ClInclude Include="chapters\misc-art.hpp" />
     <ClInclude Include="chapters\misc-text-rendering.hpp" />
     <ClInclude Include="headers\shader.hpp" />
     <ClInclude Include="headers\text.hpp" />
     <ClInclude Include="headers\window-utils.hpp" />
+    <ClInclude Include="headers\camera.hpp" />
     <ClInclude Include="lib\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
