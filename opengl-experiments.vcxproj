@@ -152,6 +152,7 @@
     <ClCompile Include="chapters\3-transformations.cpp" />
     <ClCompile Include="chapters\4-coordinate-systems.cpp" />
     <ClCompile Include="chapters\5-camera.cpp" />
+    <ClCompile Include="chapters\6-colors.cpp" />
     <ClCompile Include="chapters\misc-art.cpp" />
     <ClCompile Include="chapters\misc-text-rendering.cpp" />
     <ClCompile Include="glad.c" />
@@ -168,6 +169,7 @@
     <ClInclude Include="chapters\3-transformations.hpp" />
     <ClInclude Include="chapters\4-coordinate-systems.hpp" />
     <ClInclude Include="chapters\5-camera.hpp" />
+    <ClInclude Include="chapters\6-colors.hpp" />
     <ClInclude Include="chapters\misc-art.hpp" />
     <ClInclude Include="chapters\misc-text-rendering.hpp" />
     <ClInclude Include="headers\shader.hpp" />

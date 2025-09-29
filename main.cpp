@@ -14,6 +14,7 @@
 #include "chapters/3-transformations.hpp"
 #include "chapters/4-coordinate-systems.hpp"
 #include "chapters/5-camera.hpp"
+#include "chapters/6-colors.hpp"
 #include "chapters/misc-art.hpp"
 #include "chapters/misc-text-rendering.hpp"
 
@@ -29,8 +30,8 @@ int main(int argCount, char ** args) {
 	int response;
 
 	if (argCount < 2) {
-		cout << "\nMenu:\n\n  1. Chapter 1: Hello Triangle\n  2. Chapter 2: Textures\n  3. Chapter 3: Transformations\n  4. Chapter 4: Coordinate Systems\n  5. Camera"
-            << "\n  6. Art Shader\n  7. Text rendering\nEnter your response: ";
+		cout << "\nMenu:\n\n  1. Chapter 1: Hello Triangle\n  2. Chapter 2: Textures\n  3. Chapter 3: Transformations\n  4. Chapter 4: Coordinate Systems\n  5. Camera\n  6. Colors"
+            << "\n  7. Art Shader\n  8. Text rendering\nEnter your response: ";
 		cin >> response;
 	} else {
 		response = atoi(args[1]);
@@ -51,8 +52,9 @@ int main(int argCount, char ** args) {
 		case 3: chapter3(); break;
 		case 4: chapter4(); break;
         case 5: chapter5(); break;
-        case 6: art(); break;
-		case 7: text_rendering(); break;
+        case 6: chapter6(); break;
+        case 7: art(); break;
+		case 8: text_rendering(); break;
 	}
 
 	return 0;
